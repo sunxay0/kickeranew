@@ -15,6 +15,7 @@ const AppContent: React.FC = () => {
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser: FirebaseUser | null) => {
+      console.log('Auth state changed:', firebaseUser ? 'User logged in' : 'No user');
       if (firebaseUser) {
         const userRef = doc(db, "users", firebaseUser.uid);
         const userSnap = await getDoc(userRef);
@@ -59,9 +60,11 @@ const AppContent: React.FC = () => {
               isSpecial: false
             }
           };
+          console.log('Existing user loaded:', completeUser);
           setCurrentUser(completeUser);
         } else {
           // New user, create a profile in Firestore
+          console.log('Creating new user...');
           const isEmailProvider = firebaseUser.providerData.some(p => p?.providerId === 'password');
           const newUser: Player = {
             id: firebaseUser.uid,
@@ -100,9 +103,11 @@ const AppContent: React.FC = () => {
             }
           };
           await setDoc(userRef, newUser);
+          console.log('New user created:', newUser);
           setCurrentUser(newUser);
         }
       } else {
+        console.log('No user, showing login screen');
         setCurrentUser(null);
       }
       setAuthLoading(false);
@@ -126,18 +131,24 @@ const AppContent: React.FC = () => {
     setCurrentUser(updatedUser);
   }, []);
 
+  console.log('App render - authLoading:', authLoading, 'currentUser:', currentUser ? 'exists' : 'null');
+
   if (authLoading) {
+    console.log('Showing loading screen');
     return (
         <div className="h-screen w-screen flex flex-col items-center justify-center bg-white dark:bg-gray-900">
             <LoadingSpinner className="w-10 h-10 text-green-500" />
+            <p className="mt-4 text-gray-500">Загрузка...</p>
         </div>
     );
   }
 
   if (!currentUser) {
+    console.log('Showing login screen');
     return <LoginScreen />;
   }
 
+  console.log('Showing main layout for user:', currentUser.name);
   return <MainLayout user={currentUser} onLogout={handleLogout} onUpdateUser={handleUpdateUser} />;
 }
 

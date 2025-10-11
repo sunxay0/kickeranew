@@ -22,6 +22,7 @@ interface MainLayoutProps {
 }
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ user, onLogout, onUpdateUser }) => {
+  console.log('MainLayout render - user:', user ? user.name : 'null');
   const [activeTab, setActiveTab] = useState<Tab>('map');
   const [fields, setFields] = useState<Field[]>([]);
   const [selectedField, setSelectedField] = useState<Field | null>(null);
@@ -384,24 +385,16 @@ export const MainLayout: React.FC<MainLayoutProps> = ({ user, onLogout, onUpdate
   };
 
   return (
-    <div className="h-screen w-screen flex flex-col overflow-hidden bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800 relative">
-      {/* Animated background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-emerald-400/20 to-cyan-400/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-blue-400/20 to-purple-400/20 rounded-full blur-3xl"></div>
-      </div>
-      
-      <div className="relative z-10">
-        <Header 
-          title={tabTitles[activeTab]} 
-          pendingRequestCount={user.friendRequestsReceived.length}
-          onToggleNotifications={() => setIsNotificationPanelOpen(prev => !prev)}
-        />
-        <main className="flex-grow relative">
-          {renderContent()}
-        </main>
-        <TabBar activeTab={activeTab} setActiveTab={setActiveTab} />
-      </div>
+    <div className="h-screen w-screen flex flex-col overflow-hidden">
+      <Header 
+        title={tabTitles[activeTab]} 
+        pendingRequestCount={user.friendRequestsReceived.length}
+        onToggleNotifications={() => setIsNotificationPanelOpen(prev => !prev)}
+      />
+      <main className="flex-grow relative">
+        {renderContent()}
+      </main>
+      <TabBar activeTab={activeTab} setActiveTab={setActiveTab} />
       
       {activeChatField && (
         <ChatScreen

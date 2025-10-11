@@ -9,7 +9,7 @@ import { generateMockFieldDetails } from '../mockData';
 import { FieldDetailPanel } from '../components/FieldDetailPanel';
 import { FilterPanel } from '../components/FilterPanel';
 import { AddNewField } from '../components/AddNewField';
-import { LoadingSpinner, LocationIcon, AddIcon, RefreshIcon, FilterIcon, XMarkIcon, SearchIcon } from '../components/icons';
+import { LoadingSpinner, LocationIcon, AddIcon, RefreshIcon, FilterIcon, XMarkIcon } from '../components/icons';
 import { MapController } from '../components/MapController';
 import { GeolocationPrompt } from '../components/GeolocationPrompt';
 import { FieldCluster } from '../components/FieldCluster';
@@ -83,6 +83,7 @@ export const MapScreen: React.FC<MapScreenProps> = ({
     isFetching, setIsFetching, fetchError, map, setMap, filters, setFilters, handleFetchFields,
     searchCenter
 }) => {
+  console.log('MapScreen render - user:', user ? user.name : 'null', 'fields:', fields.length);
   const [view, setView] = useState<View>('map');
   const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -343,11 +344,11 @@ export const MapScreen: React.FC<MapScreenProps> = ({
             </div>
         )}
 
-        <div className="absolute top-4 left-4 z-10 flex flex-col gap-3">
-            <button onClick={() => setIsFilterPanelOpen(prev => !prev)} className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl hover:bg-white dark:hover:bg-gray-700 text-gray-900 dark:text-white p-4 rounded-2xl shadow-2xl border border-white/20 dark:border-gray-600/50 transition-all duration-300 transform hover:scale-110 hover:shadow-3xl" aria-label="Toggle filters">
+        <div className="absolute top-4 left-4 z-10 flex flex-col gap-2">
+            <button onClick={() => setIsFilterPanelOpen(prev => !prev)} className="bg-gray-50/80 dark:bg-gray-800/80 backdrop-blur-sm hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white p-3 rounded-full shadow-lg transition-transform transform hover:scale-110" aria-label="Toggle filters">
                 <FilterIcon />
             </button>
-            <button onClick={() => setIsSearchOpen(true)} className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-xl hover:bg-white dark:hover:bg-gray-700 text-gray-900 dark:text-white p-4 rounded-2xl shadow-2xl border border-white/20 dark:border-gray-600/50 transition-all duration-300 transform hover:scale-110 hover:shadow-3xl" aria-label="Search addresses">
+            <button onClick={() => setIsSearchOpen(true)} className="bg-gray-50/80 dark:bg-gray-800/80 backdrop-blur-sm hover:bg-gray-200 dark:hover:bg-gray-700 text-gray-900 dark:text-white p-3 rounded-full shadow-lg transition-transform transform hover:scale-110" aria-label="Search addresses">
                 <SearchIcon />
             </button>
             <div className={`transition-all duration-300 ease-in-out ${isFilterPanelOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
@@ -356,14 +357,14 @@ export const MapScreen: React.FC<MapScreenProps> = ({
         </div>
         
         <div className="absolute bottom-6 right-6 z-10 flex flex-col gap-3">
-            <button onClick={locateUser} className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white p-4 rounded-2xl shadow-2xl transition-all duration-300 transform hover:scale-110 hover:shadow-3xl border border-blue-400/20" aria-label="Find my location">
+            <button onClick={locateUser} className="bg-blue-600 hover:bg-blue-700 text-white p-4 rounded-full shadow-lg transition-transform transform hover:scale-110" aria-label="Find my location">
                 <LocationIcon />
             </button>
              {/* FIX: Explicitly pass map center to handleFetchFields to ensure it uses the current view and fix argument error. */}
-             <button onClick={() => map && handleFetchFields(map.getCenter())} disabled={isFetching || !map} className="bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white p-4 rounded-2xl shadow-2xl transition-all duration-300 transform hover:scale-110 hover:shadow-3xl disabled:bg-gray-500 disabled:cursor-not-allowed disabled:transform-none border border-emerald-400/20" aria-label="Refresh fields">
+             <button onClick={() => map && handleFetchFields(map.getCenter())} disabled={isFetching || !map} className="bg-green-600 hover:bg-green-700 text-white p-4 rounded-full shadow-lg transition-transform transform hover:scale-110 disabled:bg-gray-500 disabled:cursor-not-allowed" aria-label="Refresh fields">
                 <RefreshIcon />
             </button>
-            <button onClick={() => setView('addField')} className="bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 text-white p-4 rounded-2xl shadow-2xl transition-all duration-300 transform hover:scale-110 hover:shadow-3xl border border-purple-400/20" aria-label="Add new field">
+            <button onClick={() => setView('addField')} className="bg-indigo-600 hover:bg-indigo-700 text-white p-4 rounded-full shadow-lg transition-transform transform hover:scale-110" aria-label="Add new field">
                 <AddIcon />
             </button>
         </div>

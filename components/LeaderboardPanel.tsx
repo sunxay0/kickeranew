@@ -330,4 +330,3 @@ export const LeaderboardPanel: React.FC<LeaderboardPanelProps> = ({ currentPlaye
     </div>
   );
 };
-

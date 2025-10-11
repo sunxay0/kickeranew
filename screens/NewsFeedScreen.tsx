@@ -169,55 +169,55 @@ export const NewsFeedScreen: React.FC<NewsFeedScreenProps> = ({ user }) => {
   }
 
   return (
-    <div className="h-full w-full flex flex-col bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+    <div className="h-full w-full flex flex-col">
       {/* Категории */}
-      <div className="flex bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl border-b border-white/20 dark:border-gray-700/50 shadow-lg">
+      <div className="flex border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
         <button
           onClick={() => setSelectedCategory('all')}
-          className={`flex-1 p-4 text-sm font-medium transition-all duration-300 ${
+          className={`flex-1 p-3 text-sm font-medium transition-colors ${
             selectedCategory === 'all' 
-              ? 'text-emerald-600 border-b-2 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/20' 
-              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 hover:bg-white/50 dark:hover:bg-gray-700/50'
+              ? 'text-indigo-600 border-b-2 border-indigo-600' 
+              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
           }`}
         >
           Все
         </button>
         <button
           onClick={() => setSelectedCategory('friends')}
-          className={`flex-1 p-4 text-sm font-medium transition-all duration-300 ${
+          className={`flex-1 p-3 text-sm font-medium transition-colors ${
             selectedCategory === 'friends' 
-              ? 'text-emerald-600 border-b-2 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/20' 
-              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 hover:bg-white/50 dark:hover:bg-gray-700/50'
+              ? 'text-indigo-600 border-b-2 border-indigo-600' 
+              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
           }`}
         >
           Друзья
         </button>
         <button
           onClick={() => setSelectedCategory('fields')}
-          className={`flex-1 p-4 text-sm font-medium transition-all duration-300 ${
+          className={`flex-1 p-3 text-sm font-medium transition-colors ${
             selectedCategory === 'fields' 
-              ? 'text-emerald-600 border-b-2 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/20' 
-              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 hover:bg-white/50 dark:hover:bg-gray-700/50'
+              ? 'text-indigo-600 border-b-2 border-indigo-600' 
+              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
           }`}
         >
           Поля
         </button>
         <button
           onClick={() => setSelectedCategory('tournaments')}
-          className={`flex-1 p-4 text-sm font-medium transition-all duration-300 ${
+          className={`flex-1 p-3 text-sm font-medium transition-colors ${
             selectedCategory === 'tournaments' 
-              ? 'text-emerald-600 border-b-2 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/20' 
-              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 hover:bg-white/50 dark:hover:bg-gray-700/50'
+              ? 'text-indigo-600 border-b-2 border-indigo-600' 
+              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
           }`}
         >
           Турниры
         </button>
         <button
           onClick={() => setSelectedCategory('professional')}
-          className={`flex-1 p-4 text-sm font-medium transition-all duration-300 ${
+          className={`flex-1 p-3 text-sm font-medium transition-colors ${
             selectedCategory === 'professional' 
-              ? 'text-emerald-600 border-b-2 border-emerald-500 bg-emerald-50/50 dark:bg-emerald-900/20' 
-              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 hover:bg-white/50 dark:hover:bg-gray-700/50'
+              ? 'text-indigo-600 border-b-2 border-indigo-600' 
+              : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
           }`}
         >
           Профи
@@ -225,54 +225,45 @@ export const NewsFeedScreen: React.FC<NewsFeedScreenProps> = ({ user }) => {
       </div>
 
       {/* Лента новостей */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto">
         {getCategoryItems().map(item => (
-          <div key={item.id} className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl rounded-2xl p-6 shadow-lg border border-white/20 dark:border-gray-700/50 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
-            <div className="flex items-start gap-4">
+          <div key={item.id} className="border-b border-gray-200 dark:border-gray-700 p-4">
+            <div className="flex items-start gap-3">
               {item.author && (
-                <div className="relative">
-                  <img 
-                    src={item.author.avatar} 
-                    alt={item.author.name}
-                    className="w-12 h-12 rounded-full flex-shrink-0 border-2 border-white dark:border-gray-700 shadow-lg"
-                  />
-                  <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white dark:border-gray-800"></div>
-                </div>
+                <img 
+                  src={item.author.avatar} 
+                  alt={item.author.name}
+                  className="w-10 h-10 rounded-full flex-shrink-0"
+                />
               )}
               <div className="flex-1">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="p-2 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-xl text-white">
-                    {getItemIcon(item.type)}
-                  </div>
-                  <h3 className="font-bold text-gray-900 dark:text-white text-lg">{item.title}</h3>
+                <div className="flex items-center gap-2 mb-1">
+                  {getItemIcon(item.type)}
+                  <h3 className="font-semibold text-gray-900 dark:text-white">{item.title}</h3>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 leading-relaxed">{item.content}</p>
+                <p className="text-gray-600 dark:text-gray-300 text-sm mb-2">{item.content}</p>
                 {item.image && (
                   <img 
                     src={item.image} 
                     alt="News image"
-                    className="w-full h-48 object-cover rounded-xl mb-3 shadow-lg"
+                    className="w-full h-48 object-cover rounded-lg mb-2"
                   />
                 )}
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-500 dark:text-gray-400 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
-                    {item.timestamp}
-                  </span>
-                  <div className="flex items-center gap-6">
+                <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+                  <span>{item.timestamp}</span>
+                  <div className="flex items-center gap-4">
                     <button 
                       onClick={() => handleLike(item.id)}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-xl transition-all duration-300 ${
-                        item.isLiked 
-                          ? 'bg-red-100 dark:bg-red-900/20 text-red-600 dark:text-red-400' 
-                          : 'bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 hover:bg-red-100 dark:hover:bg-red-900/20 hover:text-red-600 dark:hover:text-red-400'
+                      className={`flex items-center gap-1 hover:text-indigo-600 ${
+                        item.isLiked ? 'text-indigo-600' : 'text-gray-500'
                       }`}
                     >
                       <HeartIcon filled={item.isLiked} className="w-4 h-4" />
-                      <span className="font-medium">{item.likes}</span>
+                      {item.likes}
                     </button>
-                    <button className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-blue-900/20 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-300">
+                    <button className="flex items-center gap-1 hover:text-indigo-600 text-gray-500">
                       <ChatBubbleIcon className="w-4 h-4" />
-                      <span className="font-medium">{item.comments}</span>
+                      {item.comments}
                     </button>
                   </div>
                 </div>
@@ -282,15 +273,13 @@ export const NewsFeedScreen: React.FC<NewsFeedScreenProps> = ({ user }) => {
         ))}
         
         {getCategoryItems().length === 0 && (
-          <div className="flex flex-col items-center justify-center h-64 text-center p-8">
-            <div className="w-20 h-20 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-6 shadow-lg">
-              <HeartIcon className="w-10 h-10 text-white" />
-            </div>
-            <h3 className="text-xl font-bold text-gray-600 dark:text-gray-300 mb-3">
+          <div className="flex flex-col items-center justify-center h-64 text-center p-4">
+            <HeartIcon className="w-16 h-16 text-gray-400 dark:text-gray-600 mb-4" />
+            <h3 className="text-lg font-semibold text-gray-500 dark:text-gray-400 mb-2">
               Нет новостей
             </h3>
-            <p className="text-gray-500 dark:text-gray-400 text-center max-w-sm">
-              В этой категории пока нет новостей. Проверьте другие разделы!
+            <p className="text-gray-400 dark:text-gray-500">
+              В этой категории пока нет новостей
             </p>
           </div>
         )}

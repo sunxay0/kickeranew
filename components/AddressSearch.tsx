@@ -121,4 +121,3 @@ export const AddressSearch: React.FC<AddressSearchProps> = ({ onLocationSelect, 
     </div>
   );
 };
-

@@ -231,4 +231,3 @@ export const AchievementsPanel: React.FC<AchievementsPanelProps> = ({ player, on
     </div>
   );
 };
-

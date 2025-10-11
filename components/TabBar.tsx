@@ -19,18 +19,12 @@ const NavButton: React.FC<{
 }> = ({ isActive, onClick, label, icon }) => (
     <button
         onClick={onClick}
-        className={`flex flex-col items-center justify-center w-full py-3 px-4 transition-all duration-300 rounded-2xl ${
-            isActive 
-                ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-lg transform scale-105' 
-                : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-white/50 dark:hover:bg-gray-800/50'
+        className={`flex flex-col items-center justify-center w-full pt-2 pb-1 transition-colors duration-200 ${
+            isActive ? 'text-green-500' : 'text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white'
         }`}
     >
-        <div className={`transition-transform duration-300 ${isActive ? 'scale-110' : ''}`}>
-            {icon}
-        </div>
-        <span className={`text-xs mt-1 font-medium transition-colors duration-300 ${
-            isActive ? 'text-white' : 'text-gray-500 dark:text-gray-400'
-        }`}>{label}</span>
+        {icon}
+        <span className={`text-xs mt-1 font-medium ${isActive ? 'text-gray-900 dark:text-white' : 'text-gray-500 dark:text-gray-400'}`}>{label}</span>
     </button>
 );
 
@@ -38,8 +32,8 @@ const NavButton: React.FC<{
 export const TabBar: React.FC<TabBarProps> = ({ activeTab, setActiveTab }) => {
   const { t } = useSettings();
   return (
-    <footer className="w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl shadow-2xl z-30 border-t border-white/20 dark:border-gray-700/50">
-      <div className="flex justify-around max-w-screen-sm mx-auto p-2">
+    <footer className="w-full bg-gray-50/90 dark:bg-gray-800/90 backdrop-blur-sm shadow-t-lg z-30 border-t border-gray-100 dark:border-gray-700">
+      <div className="flex justify-around max-w-screen-sm mx-auto">
         <NavButton
             isActive={activeTab === 'map'}
             onClick={() => setActiveTab('map')}

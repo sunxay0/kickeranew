@@ -118,4 +118,3 @@ const createFieldIcon = (field: Field) => {
     iconAnchor: [15, 15],
   });
 };
-

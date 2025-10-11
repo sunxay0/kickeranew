@@ -18,12 +18,10 @@ interface ProfileScreenProps {
 type ProfileTab = 'stats' | 'friends';
 
 const StatCard: React.FC<{ icon: React.ReactNode, label: string, value: string | number }> = ({ icon, label, value }) => (
-    <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl border border-white/20 dark:border-gray-700/50 p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex flex-col items-center justify-center text-center">
-        <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-cyan-500 rounded-xl flex items-center justify-center text-white mb-3 shadow-lg">
-            {icon}
-        </div>
-        <p className="text-3xl font-bold text-gray-900 dark:text-white mb-1">{value}</p>
-        <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">{label}</p>
+    <div className="bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-4 rounded-lg flex flex-col items-center justify-center text-center">
+        <div className="text-green-400">{icon}</div>
+        <p className="text-2xl font-bold mt-2">{value}</p>
+        <p className="text-sm text-gray-500 dark:text-gray-400">{label}</p>
     </div>
 );
 
@@ -178,14 +176,12 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ user, onLogout, on
 
   return (
     <>
-      <div className="h-full w-full flex flex-col p-4 overflow-y-auto bg-gradient-to-br from-slate-50 to-blue-50 dark:from-gray-900 dark:to-gray-800">
+      <div className="h-full w-full flex flex-col p-4 overflow-y-auto">
           {/* User Info Header */}
-          <div className="relative p-8 bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl border border-white/20 dark:border-gray-700/50 rounded-3xl shadow-2xl flex-shrink-0">
+          <div className="relative p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl flex-shrink-0">
               <div className="flex flex-col items-center text-center">
                 <div className="relative group cursor-pointer" onClick={handleAvatarClick}>
-                    <div className="w-32 h-32 rounded-full bg-gradient-to-r from-emerald-500 to-cyan-500 p-1 shadow-2xl">
-                        <img src={user.avatar} alt={user.name} className="w-full h-full rounded-full object-cover transition-opacity group-hover:opacity-75" />
-                    </div>
+                    <img src={user.avatar} alt={user.name} className="w-24 h-24 rounded-full border-4 border-green-500 shadow-lg object-cover transition-opacity group-hover:opacity-75" />
                     <div className="absolute inset-0 bg-black/50 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
                         <CameraIcon className="h-8 w-8 text-white" />
                     </div>
@@ -226,9 +222,9 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ user, onLogout, on
           </div>
           
            {/* Tabs */}
-          <div className="flex bg-white/80 dark:bg-gray-800/80 backdrop-blur-xl border border-white/20 dark:border-gray-700/50 rounded-2xl mt-6 flex-shrink-0 p-2 shadow-lg">
-              <button onClick={() => setActiveTab('stats')} className={`flex-1 p-4 text-sm font-semibold flex items-center justify-center gap-2 rounded-xl transition-all duration-300 ${activeTab === 'stats' ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-lg' : 'text-gray-500 dark:text-gray-400 hover:bg-white/50 dark:hover:bg-gray-700/50'}`}>{t('stats')}</button>
-              <button onClick={() => setActiveTab('friends')} className={`flex-1 p-4 text-sm font-semibold flex items-center justify-center gap-2 rounded-xl transition-all duration-300 ${activeTab === 'friends' ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 text-white shadow-lg' : 'text-gray-500 dark:text-gray-400 hover:bg-white/50 dark:hover:bg-gray-700/50'}`}>{t('friends')}</button>
+          <div className="flex border-b border-gray-200 dark:border-gray-700 mt-6 flex-shrink-0">
+              <button onClick={() => setActiveTab('stats')} className={`flex-1 p-3 text-sm font-semibold flex items-center justify-center gap-2 ${activeTab === 'stats' ? 'border-b-2 border-green-500 text-gray-900 dark:text-white' : 'text-gray-500 dark:text-gray-400'}`}>{t('stats')}</button>
+              <button onClick={() => setActiveTab('friends')} className={`flex-1 p-3 text-sm font-semibold flex items-center justify-center gap-2 ${activeTab === 'friends' ? 'border-b-2 border-green-500 text-gray-900 dark:text-white' : 'text-gray-500 dark:text-gray-400'}`}>{t('friends')}</button>
           </div>
           
           <div className="flex-grow mt-6">
@@ -293,7 +289,7 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = ({ user, onLogout, on
 
           {/* Logout Button */}
           <div className="mt-auto pt-8 flex-shrink-0">
-              <button onClick={onLogout} className="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-4 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+              <button onClick={onLogout} className="w-full flex items-center justify-center gap-2 bg-red-600/80 hover:bg-red-600 text-white font-bold py-3 px-4 rounded-lg transition">
                   <LogoutIcon />
                   <span>{t('logOut')}</span>
               </button>

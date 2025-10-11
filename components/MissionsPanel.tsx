@@ -281,4 +281,3 @@ export const MissionsPanel: React.FC<MissionsPanelProps> = ({ player, onUpdatePl
     </div>
   );
 };
-

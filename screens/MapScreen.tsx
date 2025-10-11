@@ -9,7 +9,7 @@ import { generateMockFieldDetails } from '../mockData';
 import { FieldDetailPanel } from '../components/FieldDetailPanel';
 import { FilterPanel } from '../components/FilterPanel';
 import { AddNewField } from '../components/AddNewField';
-import { LoadingSpinner, LocationIcon, AddIcon, RefreshIcon, FilterIcon, XMarkIcon } from '../components/icons';
+import { LoadingSpinner, LocationIcon, AddIcon, RefreshIcon, FilterIcon, XMarkIcon, SearchIcon } from '../components/icons';
 import { MapController } from '../components/MapController';
 import { GeolocationPrompt } from '../components/GeolocationPrompt';
 import { FieldCluster } from '../components/FieldCluster';
@@ -83,7 +83,6 @@ export const MapScreen: React.FC<MapScreenProps> = ({
     isFetching, setIsFetching, fetchError, map, setMap, filters, setFilters, handleFetchFields,
     searchCenter
 }) => {
-  console.log('MapScreen render - user:', user ? user.name : 'null', 'fields:', fields.length);
   const [view, setView] = useState<View>('map');
   const [isFilterPanelOpen, setIsFilterPanelOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);

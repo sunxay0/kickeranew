@@ -22,7 +22,6 @@ interface MainLayoutProps {
 }
 
 export const MainLayout: React.FC<MainLayoutProps> = ({ user, onLogout, onUpdateUser }) => {
-  console.log('MainLayout render - user:', user ? user.name : 'null');
   const [activeTab, setActiveTab] = useState<Tab>('map');
   const [fields, setFields] = useState<Field[]>([]);
   const [selectedField, setSelectedField] = useState<Field | null>(null);

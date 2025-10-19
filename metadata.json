@@ -1,0 +1,7 @@
+{
+  "name": "Street Football Finder",
+  "description": "An application for street football players to find nearby fields, see who is playing, chat, and leave reviews. It includes an interactive map, real-time player lists, field-specific chats, and offline capabilities.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
